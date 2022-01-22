@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import Todo from "./todo";
 import AddTodo from "./addtodo";
 
+
 export default class Todos extends Component {
   constructor(props){
   super(props);
   this.state = {
+    isActive:false,
     addTodoValue: "",
     todos: [
       {
@@ -30,11 +32,12 @@ export default class Todos extends Component {
 }
 
   handleDelete = (todo) => {
-
     const todos = this.state.todos.filter((t) => {
       return t.id !== todo;
     });
-    
+    if(!todos.length){
+      this.setState({isActive:true})
+    }
     this.setState({ todos });
   };
 
@@ -63,6 +66,7 @@ export default class Todos extends Component {
         isDone: false,
       });
       this.setState({ addTodoValue: "", todos });
+      this.setState({isActive:false})
     } else {
       alert("Please Add Todo Text");
     }
@@ -70,8 +74,11 @@ export default class Todos extends Component {
 
   render() {
     return (
+      
       <table className="table">
+        {this.state.isActive? <div className="alert alert-danger">No to do!</div>: null} 
         <tbody>
+          
           {this.state.todos.map((todo, index) => (
             <tr key={todo.id}>
               <Todo

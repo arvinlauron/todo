@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import './App.css';
+import Warning from "./components/alert";
 import Todos from "./components/todos";
 
 class App extends Component {
@@ -7,6 +7,7 @@ class App extends Component {
     return (
       <div className="container">
         <h1 className="text-center">My ToDo App</h1>
+        {/* <Warning/> */}
 
         <Todos />
       </div>
